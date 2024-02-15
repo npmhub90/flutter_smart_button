@@ -58,7 +58,7 @@ class _SmartButtonExampleState extends State<SmartButtonExample> {
       borderWidth: 2.0,
       borderColor: Colors.blueAccent,
       padding: EdgeInsets.symmetric(vertical: 12.0, horizontal: 24.0),
-      tooltip: '클릭하여 작업 시작',
+      tooltip: 'start after click',
     );
   }
 }

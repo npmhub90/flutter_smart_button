@@ -1,39 +1,37 @@
 
 # Flutter Smart Button
 
-A customizable smart button widget for Flutter applications, designed to handle asynchronous operations with a loading indicator, and customizable styles.
+A customizable smart button widget for Flutter, designed to enhance your application's UI by handling asynchronous operations with a loading indicator, success and failure feedback, and customizable styles.
 
 ## Features
 
-- Shows a loading indicator when performing asynchronous operations.
-- Customizable button styles (color, text style, borders, etc.).
-- Debounce capability to prevent multiple taps.
-- Easy to implement with a simple API.
+- **Loading Indicator**: Displays a loading spinner when performing asynchronous tasks.
+- **Success and Failure Indicators**: Customizable icons or widgets to indicate the outcome of the operation.
+- **Debounce Functionality**: Prevents multiple taps by setting a debounce duration.
+- **Customizable Styles**: Easily customize button colors, border, padding, and text styles.
+- **Enhanced User Feedback**: Provides visual feedback through animations and touch effects.
+- **Callbacks for Success and Failure**: Execute functions based on the outcome of the asynchronous operation.
 
 ## Getting Started
 
-To use the `flutter_smart_button` package, add it to your Flutter project's dependencies.
-
-### Installation
-
-Add `flutter_smart_button` to your `pubspec.yaml` file:
+To include `flutter_smart_button` in your project, add the following to your `pubspec.yaml` file:
 
 ```yaml
 dependencies:
-  flutter_smart_button: ^0.1.0
+  flutter_smart_button: ^0.2.0
 ```
 
-Then, run `flutter pub get` to download the package.
+Run `flutter pub get` to install the package.
 
-### Usage
+## Usage
 
-Import `flutter_smart_button` in your Dart file:
+Import `flutter_smart_button`:
 
 ```dart
 import 'package:flutter_smart_button/flutter_smart_button.dart';
 ```
 
-Use `SmartButton` widget:
+Use the `SmartButton` widget in your Flutter app:
 
 ```dart
 SmartButton(
@@ -41,13 +39,28 @@ SmartButton(
   onPressed: () async {
     // Your asynchronous operation here
   },
-  isLoading: _isLoading, // Control the loading state
+  successIndicator: Icon(Icons.check, color: Colors.green),
+  failureIndicator: Icon(Icons.close, color: Colors.red),
+  isLoading: false, // Control loading state
+  tooltip: 'Click to start operation',
+  // Customize the button as needed
 )
 ```
 
+## Customization
+
+`SmartButton` allows for extensive customization including:
+
+- `buttonColor`: Change the background color of the button.
+- `textStyle`: Customize text style within the button.
+- `borderWidth`, `borderColor`: Customize the button's border.
+- `padding`: Set the padding inside the button.
+- `loadingIndicator`, `successIndicator`, `failureIndicator`: Provide custom widgets for different states.
+- `onSuccess`, `onFailure`: Callbacks for handling the outcome of the asynchronous operation.
+
 ## Contributing
 
-Contributions are welcome! Please read the contributing guidelines before submitting pull requests.
+Contributions are welcome! If you have ideas for new features or improvements, feel free to fork the repository and submit a pull request.
 
 ## License
 

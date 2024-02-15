@@ -7,6 +7,8 @@ class SmartButton extends StatefulWidget {
   final Widget? successIndicator;
   final Widget? failureIndicator;
   final Future<void> Function() onPressed;
+  final VoidCallback? onSuccess;
+  final VoidCallback? onFailure;
   final Color? buttonColor;
   final TextStyle? textStyle;
   final double? borderWidth;
@@ -20,9 +22,11 @@ class SmartButton extends StatefulWidget {
     Key? key,
     required this.child,
     this.loadingIndicator,
-    this.successIndicator,
-    this.failureIndicator,
+    this.successIndicator = const Icon(Icons.check, color: Colors.white),
+    this.failureIndicator = const Icon(Icons.close, color: Colors.white),
     required this.onPressed,
+    this.onSuccess,
+    this.onFailure,
     this.buttonColor,
     this.textStyle,
     this.borderWidth,
@@ -40,6 +44,7 @@ class SmartButton extends StatefulWidget {
 class _SmartButtonState extends State<SmartButton> {
   bool _isLoading = false;
   DateTime? _lastPressedAt;
+  bool _isSuccess = false;
 
   @override
   void initState() {
@@ -58,11 +63,27 @@ class _SmartButtonState extends State<SmartButton> {
       });
       try {
         await widget.onPressed();
+        widget.onSuccess?.call();
+        setState(() {
+          _isSuccess = true;
+        });
       } catch (e) {
+        widget.onFailure?.call();
+        setState(() {
+          _isSuccess = false;
+        });
       } finally {
         if (mounted) {
           setState(() {
             _isLoading = false;
+          });
+          // Reset the success state after a delay
+          Future.delayed(Duration(seconds: 2), () {
+            if (mounted) {
+              setState(() {
+                _isSuccess = false;
+              });
+            }
           });
         }
       }
@@ -90,8 +111,11 @@ class _SmartButtonState extends State<SmartButton> {
         child: _isLoading
             ? widget.loadingIndicator ??
                 SpinKitCircle(
-                    color: Colors.white) // flutter_spinkit의 로딩 인디케이터 사용
-            : widget.child,
+                    color:
+                        Colors.white) // Use flutter_spinkit loading indicator
+            : _isSuccess
+                ? widget.successIndicator ?? const SizedBox.shrink()
+                : widget.failureIndicator ?? widget.child,
       ),
     );
   }
