@@ -30,7 +30,7 @@ Then, run `flutter pub get` to download the package.
 Import `flutter_smart_button` in your Dart file:
 
 ```dart
-import 'package:flutter_smart_button/smart_button.dart';
+import 'package:flutter_smart_button/flutter_smart_button.dart';
 ```
 
 Use `SmartButton` widget:

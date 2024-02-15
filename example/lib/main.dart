@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_smart_button/smart_button.dart';
+import 'package:flutter_smart_button/flutter_smart_button.dart';
 
 void main() {
   runApp(MyApp());
