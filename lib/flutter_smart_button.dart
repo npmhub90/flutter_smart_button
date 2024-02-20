@@ -17,6 +17,9 @@ class SmartButton extends StatefulWidget {
   final Duration debounceDuration;
   final bool isLoading;
   final String? tooltip;
+  final bool disabled;
+  final Widget? disabledIndicator;
+  final Color? disabledColor;
 
   const SmartButton({
     Key? key,
@@ -35,6 +38,9 @@ class SmartButton extends StatefulWidget {
     this.debounceDuration = const Duration(milliseconds: 300),
     this.isLoading = false,
     this.tooltip,
+    this.disabled = false,
+    this.disabledIndicator,
+    this.disabledColor,
   }) : super(key: key);
 
   @override
@@ -53,7 +59,7 @@ class _SmartButtonState extends State<SmartButton> {
   }
 
   Future<void> _handlePressed() async {
-    if (_isLoading) return;
+    if (_isLoading || widget.disabled) return;
     final now = DateTime.now();
     if (_lastPressedAt == null ||
         now.difference(_lastPressedAt!) > widget.debounceDuration) {
@@ -77,7 +83,7 @@ class _SmartButtonState extends State<SmartButton> {
           setState(() {
             _isLoading = false;
           });
-          // Reset the success state after a delay
+
           Future.delayed(Duration(seconds: 2), () {
             if (mounted) {
               setState(() {
@@ -96,7 +102,9 @@ class _SmartButtonState extends State<SmartButton> {
       message: widget.tooltip ?? '',
       child: ElevatedButton(
         style: ElevatedButton.styleFrom(
-          backgroundColor: widget.buttonColor,
+          backgroundColor: widget.disabled
+              ? widget.disabledColor ?? Colors.grey
+              : widget.buttonColor,
           textStyle: widget.textStyle,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(4.0),
@@ -107,15 +115,15 @@ class _SmartButtonState extends State<SmartButton> {
           ),
           padding: widget.padding,
         ),
-        onPressed: _handlePressed,
-        child: _isLoading
-            ? widget.loadingIndicator ??
-                SpinKitCircle(
-                    color:
-                        Colors.white) // Use flutter_spinkit loading indicator
-            : _isSuccess
-                ? widget.successIndicator ?? const SizedBox.shrink()
-                : widget.failureIndicator ?? widget.child,
+        onPressed: widget.disabled ? null : _handlePressed,
+        child: widget.disabled
+            ? widget.disabledIndicator ??
+                const Text('Disabled', style: TextStyle(color: Colors.white))
+            : _isLoading
+                ? widget.loadingIndicator ?? SpinKitCircle(color: Colors.white)
+                : _isSuccess
+                    ? widget.successIndicator ?? const SizedBox.shrink()
+                    : widget.failureIndicator ?? widget.child,
       ),
     );
   }

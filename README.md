@@ -1,6 +1,12 @@
 
 # Flutter Smart Button
 
+[![Dart SDK Version](https://badgen.net/pub/sdk-version/flutter_smart_button)](https://pub.dev/packages/flutter_smart_button)
+[![Pub Version](https://img.shields.io/pub/v/flutter_smart_button)](https://pub.dev/packages/flutter_smart_button)
+[![Pub Likes](https://img.shields.io/pub/likes/flutter_smart_button)](https://pub.dev/packages/flutter_smart_button)
+[![style: very good analysis](https://img.shields.io/badge/style-very_good_analysis-B22C89.svg)](https://pub.dev/packages/very_good_analysis)
+[![Common Changelog](https://common-changelog.org/badge.svg)](https://common-changelog.org)
+
 A customizable smart button widget for Flutter, designed to enhance your application's UI by handling asynchronous operations with a loading indicator, success and failure feedback, and customizable styles.
 
 ## Features

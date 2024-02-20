@@ -2,7 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
-## [0.2.0] - 20214-02-15
+## 0.2.1
+
+### Added
+- Added `disabled`, `disabledIndicator`, and `disabledColor` properties to `SmartButton` to handle the disabled state.
+
+## 0.2.0
 
 ### Added
 - Added `successIndicator` and `failureIndicator` properties to `SmartButton` for representing success and failure states.
@@ -17,7 +22,7 @@ All notable changes to this project will be documented in this file.
 ### Fixed
 - Fixed issues with UI display during the loading state.
 
-## [0.1.0] - 20214-02-15
+## 0.1.0
 
 ### Added
 - Initial release of the `SmartButton` widget.
